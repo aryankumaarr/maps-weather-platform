@@ -1,0 +1,44 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Node / Next.js (frontend)
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python (backend)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Docker
+*.pid
+
+# Infra / Terraform (if added later)
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# Data volumes mounted locally (if any)
+infrastructure/docker/postgres-data/
+infrastructure/docker/redis-data/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
