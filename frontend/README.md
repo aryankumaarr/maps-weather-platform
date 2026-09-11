@@ -34,3 +34,84 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Backend Setup
+
+The backend is built with **Python and FastAPI**.
+
+### 1. Go to the backend folder
+
+From the project root:
+
+```powershell
+cd backend
+```
+
+### 2. Create a virtual environment
+
+```powershell
+python -m venv venv
+```
+
+### 3. Activate the virtual environment
+
+For Windows PowerShell:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+If PowerShell says that running scripts is disabled, run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+Then activate the environment again:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+You should see `(venv)` at the beginning of your terminal.
+
+### 4. Install the backend dependencies
+
+```powershell
+pip install -r requirements.txt
+```
+
+### 5. Start the FastAPI backend
+
+```powershell
+uvicorn app.main:app --reload
+```
+
+If the server starts successfully, the terminal should display:
+
+```text
+Application startup complete.
+```
+
+The backend will be available at:
+
+`http://127.0.0.1:8000`
+
+FastAPI Swagger documentation is available at:
+
+`http://127.0.0.1:8000/docs`
+
+### Stopping the Backend
+
+Press:
+
+```text
+Ctrl + C
+```
+
+in the terminal running the server.
+
+### Important
+
+Do not commit the local `venv` folder or `.env` file. Each team member should create their own virtual environment and install the dependencies using `requirements.txt`.
