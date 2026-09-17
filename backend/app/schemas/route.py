@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+
 # Pydantic is a library that validates and structures data for the API.
 
 # BaseModel provides Pydantic validation; putting it in () means Coordinates inherits from it.
