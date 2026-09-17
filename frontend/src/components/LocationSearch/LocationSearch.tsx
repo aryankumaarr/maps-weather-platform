@@ -1,6 +1,11 @@
+"use client";
 import "@/components/LocationSearch/LocationSearch.scss";
+import { useState } from "react";
 
 export default function LocationSearch() {
+  const [origin,setOrigin] = useState("");
+  const [destination,setDestination] = useState("");
+   
   return (
     <section className="location-search">
       <h2>Plan Your Route</h2>
@@ -10,16 +15,22 @@ export default function LocationSearch() {
           <input
             type="text"
             id="origin"
-            placeholder="Enter Starting Location"
+            value={origin}
+            onChange={(event)=>setOrigin(event.target.value)}
+            placeholder="Enter Start Location"
           />
 
           <input
             type="text"
             id="destination"
-            placeholder="Enter Destination Location"
+            value={destination}
+            onChange={(event)=>setDestination(event.target.value)}
+            placeholder="Enter Destination"
           />
         </div>
       </div>
+
+      <button type="button">Find Route</button>
     </section>
   );
 }
