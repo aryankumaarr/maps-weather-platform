@@ -9,14 +9,16 @@ A weather map plugin that allows you to redirect traffic based off of weather co
 
 ## Getting started
 
-Everything runs locally via Docker Compose — free/open-source images only, no paid services
-required. Each person runs their own full stack on their own laptop; nothing here needs to be
+Backend, database, and cache run locally via Docker Compose — free/open-source images only, no
+paid services required. Frontend runs natively via `npm run dev` for now (not containerized
+yet). Each person runs their own full stack on their own laptop; nothing here needs to be
 reachable from the internet.
 
 ### Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
   (Rancher Desktop or Colima work too, if you'd rather avoid Docker Desktop's licensing terms)
+- Node.js (for the frontend)
 - Git
 
 ### First time only
@@ -25,8 +27,21 @@ reachable from the internet.
 git clone <repo-url>
 cd maps-weather-platform
 cp .env.example .env
+# fill in .env with real values (API keys, etc.) before continuing
 docker compose up --build
 ```
+
+In a separate terminal, start the frontend:
+
+```bash
+cd frontend
+cp .env.example .env.local
+npm install
+npm run dev
+```
+
+Note the frontend uses its own `.env.local` — Next.js doesn't read the root `.env`
+(that one's only for Docker Compose / the backend), so this is a separate copy step.
 
 `.env` is gitignored on purpose (so nobody commits real secrets/API keys) — `git pull` will
 never touch it, so this `cp` only needs to happen once. If you want different ports or
@@ -47,8 +62,9 @@ docker compose up --build
 ```
 
 Always include `--build`. Without it, Docker may reuse an old image even after
-`docker-compose.yml`, a `Dockerfile`, `requirements.txt`, or `package.json` changed — `--build`
-is a fast no-op if nothing actually changed, so it's safe to always include.
+`compose.yaml`, a `Dockerfile`, `requirements.txt`, or `package.json` changed — `--build`
+is a fast no-op if nothing actually changed, so it's safe to always include. If `frontend/`
+changed, also re-run `npm install` before `npm run dev`.
 
 ### Stopping
 
