@@ -22,9 +22,12 @@ docker compose up --build
 ```
 
 - Backend: http://localhost:8000
-- Frontend: http://localhost:3000
 - Postgres: localhost:5432 (with PostGIS)
 - Redis: localhost:6379
+
+Frontend isn't containerized yet — run it separately with `npm install && npm run dev` in
+`frontend/` (see root [README.md](../README.md)). A `frontend/Dockerfile` exists for when
+that changes, but nothing in `compose.yaml` references it right now.
 
 ### Optional profiles
 
@@ -39,4 +42,5 @@ docker compose --profile monitoring up
 ## CI/CD
 
 GitHub Actions (free for this repo's tier) — see [.github/workflows/ci.yml](../.github/workflows/ci.yml).
-Lints/tests the backend and frontend, and builds the Docker images on every push/PR.
+Lints/tests the backend and frontend, and builds the backend Docker image on every push/PR
+(frontend is built directly via `npm run build`, not through Docker).
