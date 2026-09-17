@@ -35,9 +35,13 @@ In a separate terminal, start the frontend:
 
 ```bash
 cd frontend
+cp .env.example .env.local
 npm install
 npm run dev
 ```
+
+Note the frontend uses its own `.env.local` — Next.js doesn't read the root `.env`
+(that one's only for Docker Compose / the backend), so this is a separate copy step.
 
 `.env` is gitignored on purpose (so nobody commits real secrets/API keys) — `git pull` will
 never touch it, so this `cp` only needs to happen once. If you want different ports or
