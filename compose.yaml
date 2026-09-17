@@ -53,24 +53,6 @@ services:
     volumes:
       - ./backend:/app
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    env_file:
-      - .env
-    environment:
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
-    ports:
-      - "${FRONTEND_PORT:-3000}:3000"
-    depends_on:
-      - backend
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
-
   # Optional DB admin UI: docker compose --profile tools up
   pgadmin:
     image: dpage/pgadmin4:latest

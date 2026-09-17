@@ -1,7 +1,7 @@
 # AWS
 
 No live infrastructure yet — local dev runs entirely on Docker Compose (see the root
-[docker-compose.yml](../../docker-compose.yml)), so no AWS spend is required to build the
+[compose.yaml](../../compose.yaml)), so no AWS spend is required to build the
 project.
 
 ## Planned free-tier-friendly shape (when we're ready to deploy)
