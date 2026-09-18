@@ -1,0 +1,9 @@
+@mixin center($type: flex, $direction: row) {
+  display: $type;
+  justify-content: center;
+  align-items: center;
+  
+  @if $type == flex {
+    flex-direction: $direction;
+  }
+}
