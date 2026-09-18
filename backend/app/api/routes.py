@@ -1,29 +1,33 @@
-from fastapi import APIRouter
-
 # APIRouter is a FastAPI class used to organize API endpoints in separate files
 from app.schemas.route import RouteRequest
 
-# Imports our RouteRequest model from app/schemas/route.py to validate incoming route data
+# Imports our RouteRequest model to validate incoming route data
 from app.services.route_service import get_route_data
 
-# Imports the routing function from the route service
+# Imports the routing analysis so the API can analyze weather along the route
+from app.services.routing_analysis import analyze_route_weather
+from fastapi import APIRouter
 
 router = APIRouter()
-# Creates a router object where we can register route-related API endpoints
+
 
 # Registers this function as a POST endpoint at /route
 @router.post("/route")
 def get_route(request: RouteRequest):
-   #sends the validated coordinates to the route service
-   route = get_route_data(request.origin, request.destination)
+    # Sends the validated coordinates to the route service
+    route = get_route_data(request.origin, request.destination)
 
-     # Returns the stable Day 2 response contract for the frontend.
-   return {
+    # Analyzes weather along the route and creates a routing recommendation
+    analysis = analyze_route_weather(route)
+
+    # Returns the Day 2 response contract using the routing analysis results
+    return {
         "route": route,
         "weather_analysis": {
-            "overall_risk": "moderate",
-            "conditions": []
+            "overall_risk": analysis["overall_risk"],
+            "conditions": [],
         },
-        "alternative_route": None,
-        "recommendation": "normal_route"
-           }
+        "alternative_route": analysis["alternative_route"],
+        "recommendation": analysis["recommendation"],
+        "reason": analysis["reason"],
+    }
